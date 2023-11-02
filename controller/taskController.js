@@ -2,8 +2,15 @@ const Task = require("../model/taskModel");
 const { v4: uuidv4 } = require("uuid");
 
 // Get all task
-const getAllTask = (req, res) => {
+const getAllTask = async (req, res) => {
+    const email = req.query.mail
   try {
+    const tasks = await Task.find({ creatorEmail: email });
+    if (tasks) {
+      res.status(201).json(tasks);
+    } else {
+      res.status(400).json({ message: "something went wrong" });
+    }
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -46,4 +53,5 @@ const updateTask = (req, res) => {};
 // Delete a new task
 const deleteTask = (req, res) => {};
 
-module.exports = { createTask };
+module.exports = { getAllTask, createTask };
+
