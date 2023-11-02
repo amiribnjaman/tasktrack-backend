@@ -3,9 +3,9 @@ const { v4: uuidv4 } = require("uuid");
 
 // Get all task
 const getAllTask = async (req, res) => {
-    const email = req.query.mail
+  const email = req.query.mail;
   try {
-    const tasks = await Task.find({ creatorEmail: email });
+    const tasks = await Task.find({});
     if (tasks) {
       res.status(201).json(tasks);
     } else {
@@ -38,7 +38,7 @@ const createTask = async (req, res) => {
     });
     const data = await newTask.save();
     if (data) {
-      res.status(201).json({ message: "created a new task", newTask });
+      res.status(200).json({ message: "created a new task", newTask });
     } else {
       res.status(400).json({ message: "something went wrong" });
     }
@@ -47,11 +47,33 @@ const createTask = async (req, res) => {
   }
 };
 
-// Create a new task
-const updateTask = (req, res) => {};
+// Update a task
+const updateTask = async (req, res) => {
+  const { id, creatorEmail, completion, teamMemberNum } = req.body;
+  try {
+    const update = {
+      creatorEmail,
+      completion,
+      teamMemberNum,
+    };
+    const updateTask = await Task.updateOne({id}, update, {
+      returnOriginal: false,
+    });
+    // const data = await updateTask.save();
+    if (updateTask) {
+      res.status(201).json({ message: "created a new task", updateTask });
+    } else {
+      res.status(400).json({ message: "something went wrong" });
+    }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
 
-// Delete a new task
+// Delete a task
 const deleteTask = (req, res) => {};
 
-module.exports = { getAllTask, createTask };
+module.exports = { getAllTask, createTask, updateTask };
 
+
+// jamirrdd@mail.com
