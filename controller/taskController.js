@@ -49,14 +49,15 @@ const createTask = async (req, res) => {
 
 // Update a task
 const updateTask = async (req, res) => {
-  const { id, creatorEmail, completion, teamMemberNum } = req.body;
+  const id = req.params.id;
+  const { creatorEmail, completion, teamMemberNum } = req.body;
   try {
     const update = {
       creatorEmail,
       completion,
       teamMemberNum,
     };
-    const updateTask = await Task.updateOne({id}, update, {
+    const updateTask = await Task.updateOne({ id }, update, {
       returnOriginal: false,
     });
     // const data = await updateTask.save();
@@ -71,9 +72,17 @@ const updateTask = async (req, res) => {
 };
 
 // Delete a task
-const deleteTask = (req, res) => {};
+const deleteTask = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  try {
+      await Task.deleteOne({ id });
+      res.status(200).json({message: 'Deleted successfully'})
+  } catch (error) {
+      res.status(500).send(error.message);
+  }
+};
 
-module.exports = { getAllTask, createTask, updateTask };
-
+module.exports = { getAllTask, createTask, updateTask, deleteTask };
 
 // jamirrdd@mail.com
