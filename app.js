@@ -18,7 +18,9 @@ app.use('/api/users', userRouter)
 
 // Testing route
 app.get('/', (req, res) => {
-    res.status(200).sendFile(__dirname + '/views/index.html')
+    res.status(200).json({
+        message: 'All right'
+    })
 })
 
 // Handling url error
