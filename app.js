@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require('cors')
 const userRouter = require('./route/userRouter')
+const taskRouter = require("./route/taskRouter");
 require('./config/db')
 
 
@@ -12,7 +13,10 @@ app.use(express.json())
 
 
 // Routes 
+// User route
 app.use('/api/user', userRouter)
+// Task route
+app.use('/api/task', taskRouter)
 
 
 
