@@ -13,10 +13,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
     unique: true,
-    // validate: {
-    //   validator: () => Promise.resolve(false),
-    //   message: "This email is already in use.",
-    // },
   },
   password: {
     type: String,
