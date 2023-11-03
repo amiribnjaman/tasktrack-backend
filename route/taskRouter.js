@@ -6,9 +6,10 @@ const {
   updateTask,
   deleteTask,
 } = require("../controller/taskController");
+const jsonwebtokenAuth = require("../middleware/authorization");
 
 // Routes
-router.get("/", getAllTask);
+router.get("/", jsonwebtokenAuth, getAllTask);
 router.post("/", createTask);
 router.patch("/:id", updateTask);
 router.delete("/:id", deleteTask);

@@ -11,23 +11,23 @@ const taskSchema = new mongoose.Schema({
   },
   taskTitle: {
     type: String,
-    require: true,
+    required: true,
   },
   completion: {
     type: String,
-    require: true,
+    required: true,
   },
   teamLeader: {
     type: String,
-    require: true,
+    required: true,
   },
   teamMemberNum: {
     type: String,
-    require: true,
+    required: true,
   },
   teamMembers: {
     type: [String | Array],
-    require: false,
+    required: false,
   },
   createOn: {
     type: Date,

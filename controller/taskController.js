@@ -3,8 +3,9 @@ const { v4: uuidv4 } = require("uuid");
 
 // Get all task
 const getAllTask = async (req, res) => {
-  const email = req.query.mail;
+  const email = req.query.email;
   try {
+    // {creatorEmail: email}
     const tasks = await Task.find({});
     if (tasks) {
       res.status(201).json(tasks);

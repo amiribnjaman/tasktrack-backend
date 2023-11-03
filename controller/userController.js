@@ -2,6 +2,8 @@ const User = require("../model/userModel");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // Create OR Signup a user
 const createUser = async (req, res) => {
@@ -29,7 +31,8 @@ const loginUser = async (req, res) => {
     const getuser = await User.findOne({ email: email });
     const hashPass = bcrypt.compareSync(password, getuser.password);
     if (hashPass) {
-      res.status(200).json(getuser);
+      const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN);
+      res.status(200).json({token, user: getuser});
     } else {
       res.status(401).json({ message: "Email or password is Invalid" });
     }
