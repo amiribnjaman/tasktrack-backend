@@ -3,7 +3,6 @@ const { v4: uuidv4 } = require("uuid");
 
 // Get One task
 const getOneTask = async (req, res) => {
-  // const email = req.query.email;
   const { email } = req.decoded;
   const id = req.params.id;
   try {
@@ -106,6 +105,7 @@ const search = async (req, res) => {
   const creatorEmail = req.decoded.email
   try {
     const tasks = await Task.find({ creatorEmail });
+
     const data = tasks.filter((d) => d.taskTitle.toLowerCase() == query);
     if (data) {
       res.status(200).json(data);
@@ -127,4 +127,3 @@ module.exports = {
   search,
 };
 
-// jamirrdd@mail.com
