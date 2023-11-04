@@ -1,8 +1,12 @@
 # tasktrack-backend
-task track is a task management application
+Task Track is a task management application
 I have implemented CRUD Operation and Search operation also.
 
-# Environment variable those need to run the application locally
+# instruction
+first, clone the project and install the necessary packages by running the NPM I command
+and then copy and set environment variables from below to the .env file: 
+
+# Environment variable that needs to run the application locally
 
     *DB_URL=mongodb+srv://amiribnjaman:xYwZMdaqJYn5wmG7@cluster0.ffl4brm.mongodb.net/tasktrack
     *ACCESS_TOKEN=ZgXZerHpR3IeqHOviY9SOtfCvd6RRI60
