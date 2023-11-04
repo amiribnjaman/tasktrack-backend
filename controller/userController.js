@@ -9,17 +9,22 @@ require("dotenv").config();
 const signupUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const hashPass = bcrypt.hashSync(password, saltRounds);
-    const newUser = new User({
-      id: uuidv4(),
-      name,
-      email,
-      password: hashPass,
-    });
-    await newUser.save();
-    res.send({status: 201, user: newUser});
+    const getuser = await User.findOne({ email: email });
+    if (!getuser) {
+      const hashPass = bcrypt.hashSync(password, saltRounds);
+      const newUser = new User({
+        id: uuidv4(),
+        name,
+        email,
+        password: hashPass,
+      });
+      await newUser.save();
+      res.send({ status: 201, user: newUser });
+    } else {
+      res.send({ status: 400, message: 'User already registered' });
+    }
   } catch (error) {
-    res.send(500).send(error.message);
+    res.status(500).send(error.message);
   }
 };
 
