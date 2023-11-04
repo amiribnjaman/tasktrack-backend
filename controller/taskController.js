@@ -64,7 +64,6 @@ const createTask = async (req, res) => {
 const updateTask = async (req, res) => {
   const id = req.params.id;
   const creatorEmail = req.decoded.email;
-  console.log(id, creatorEmail, req.body);
 
   const { taskTitle, teamLeader, completion, teamMemberNum } = req.body;
   try {
