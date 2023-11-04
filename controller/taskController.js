@@ -1,7 +1,7 @@
 const Task = require("../model/taskModel");
 const { v4: uuidv4 } = require("uuid");
 
-// Get One task
+// Get One task API 
 const getOneTask = async (req, res) => {
   const { email } = req.decoded;
   const id = req.params.id;
@@ -17,7 +17,7 @@ const getOneTask = async (req, res) => {
   }
 };
 
-// Get all task
+// Get all task API 
 const getAllTask = async (req, res) => {
   // const email = req.query.email;
   const { email } = req.decoded;
@@ -33,7 +33,7 @@ const getAllTask = async (req, res) => {
   }
 };
 
-// Create a new task api
+// Create a new task API 
 const createTask = async (req, res) => {
   const creatorEmail = req.decoded.email;
 
@@ -60,7 +60,7 @@ const createTask = async (req, res) => {
   }
 };
 
-// Update a task
+// Update a task API
 const updateTask = async (req, res) => {
   const id = req.params.id;
   const creatorEmail = req.decoded.email;
@@ -88,7 +88,7 @@ const updateTask = async (req, res) => {
   }
 };
 
-// Delete a task
+// Delete a task API
 const deleteTask = async (req, res) => {
   const id = req.params.id;
   try {
@@ -99,7 +99,7 @@ const deleteTask = async (req, res) => {
   }
 };
 
-// SEARCH API
+// SEARCH OPERATION API
 const search = async (req, res) => {
   const query = req.query.search.toLowerCase();
   const creatorEmail = req.decoded.email
