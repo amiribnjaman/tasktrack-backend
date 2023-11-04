@@ -9,10 +9,10 @@ I have implemented CRUD Operation and Search operation also.
 
 
 # Packages for backend
-bcrypt
-cors
-dotenv
-express
-jsonwebtoken
-mongoose
-uuid
+bcrypt,
+cors,
+dotenv,
+express,
+jsonwebtoken,
+mongoose,
+uuid,
