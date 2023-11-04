@@ -6,11 +6,10 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 // Create OR Signup a user
-const createUser = async (req, res) => {
+const signupUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const hashPass = bcrypt.hashSync(password, saltRounds);
-    console.log(hashPass);
     const newUser = new User({
       id: uuidv4(),
       name,
@@ -18,9 +17,9 @@ const createUser = async (req, res) => {
       password: hashPass,
     });
     await newUser.save();
-    res.status(201).json(newUser);
+    res.send({status: 201, user: newUser});
   } catch (error) {
-    res.status(500).send(error.message);
+    res.send(500).send(error.message);
   }
 };
 
@@ -31,8 +30,9 @@ const loginUser = async (req, res) => {
     const getuser = await User.findOne({ email: email });
     const hashPass = bcrypt.compareSync(password, getuser.password);
     if (hashPass) {
+      // JWT Sign
       const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN);
-      res.status(200).json({token, user: getuser});
+      res.send({ status: 200, token, user: getuser });
     } else {
       res.status(401).json({ message: "Email or password is Invalid" });
     }
@@ -41,4 +41,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginUser };
+module.exports = { signupUser, loginUser };

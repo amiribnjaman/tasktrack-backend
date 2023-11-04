@@ -26,7 +26,7 @@ const taskSchema = new mongoose.Schema({
     required: true,
   },
   teamMembers: {
-    type: [String | Array],
+    type: Array,
     required: false,
   },
   createOn: {

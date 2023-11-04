@@ -5,11 +5,13 @@ const {
   createTask,
   updateTask,
   deleteTask,
+  getOneTask,
 } = require("../controller/taskController");
-const jsonwebtokenAuth = require("../middleware/authorization");
+// const jsonwebtokenAuth = require("../middleware/authorization");
 
 // Routes
-router.get("/", jsonwebtokenAuth, getAllTask);
+router.get("/:id", getOneTask);
+router.get("/", getAllTask);
 router.post("/", createTask);
 router.patch("/:id", updateTask);
 router.delete("/:id", deleteTask);
