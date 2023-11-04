@@ -5,9 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 const getOneTask = async (req, res) => {
   // const email = req.query.email;
   const { email } = req.decoded;
-  console.log(email)
-  const id = req.params.id
-  console.log(id)
+  const id = req.params.id;
   try {
     const tasks = await Task.findOne({ id });
     if (tasks) {
@@ -69,7 +67,7 @@ const updateTask = async (req, res) => {
   const creatorEmail = req.decoded.email;
   console.log(id, creatorEmail, req.body);
 
-  const {taskTitle,teamLeader, completion, teamMemberNum } = req.body;
+  const { taskTitle, teamLeader, completion, teamMemberNum } = req.body;
   try {
     const update = {
       taskTitle,
@@ -102,6 +100,31 @@ const deleteTask = async (req, res) => {
   }
 };
 
-module.exports = { getOneTask,getAllTask, createTask, updateTask, deleteTask };
+// SEARCH API
+const search = async (req, res) => {
+  const query = req.query.search.toLowerCase();
+  const creatorEmail = req.decoded.email
+  try {
+    const tasks = await Task.find({ creatorEmail });
+    const data = tasks.filter((d) => d.taskTitle.toLowerCase() == query);
+    if (data) {
+      res.status(200).json(data);
+    } else {
+      res.status(400).json({ message: "something went wrong" });
+    }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+
+module.exports = {
+  getOneTask,
+  getAllTask,
+  createTask,
+  updateTask,
+  deleteTask,
+  search,
+};
 
 // jamirrdd@mail.com

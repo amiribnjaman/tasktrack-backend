@@ -4,7 +4,7 @@ const cors = require('cors')
 const userRouter = require('./route/userRouter')
 const taskRouter = require("./route/taskRouter");
 require('./config/db')
-const jsonwebtokenAuth = require("./middleware/authorization");
+// const jsonwebtokenAuth = require("./middleware/authorization");
 
 
 // Middlewares
@@ -17,7 +17,7 @@ app.use(express.json())
 // User route
 app.use('/api/user', userRouter)
 // Task route
-app.use('/api/task',jsonwebtokenAuth, taskRouter)
+app.use('/api/task', taskRouter)
 
 
 
